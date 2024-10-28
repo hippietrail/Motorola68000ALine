@@ -1,4 +1,4 @@
-# SLA specification for Motorola 68000 series
+# SLA specification for Motorola 68000 series with A-Line support
 
 define endian=big;
 define alignment=2;
@@ -81,6 +81,7 @@ define token instr (16)
   reg9an = (9,11)
   copid = (9,11)
   op    = (12,15)
+  op011 = (0,11)
   opbig  = (8,15)
   op01 = (0,1)
   op02 = (0,2)
@@ -881,6 +882,8 @@ macro rotateRightExtended(count, register, width) {
 # Here are the instructions
 
 with : extGUARD=1 {
+
+:atrap "#"op011 is op=10 & op011 unimpl
 
 :abcd Tyb,Txb			is op=12 & op48=16 & Tyb & Txb {
 	CF = carry(Txb,carry(Tyb,XF));
